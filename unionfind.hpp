@@ -19,34 +19,6 @@ namespace unionfind {
                 }
             }
 
-            QuickFind(std::size_t size, Value* values) : _size((size == 0) ? 10 : size), _capacity(_size*2), _values(new Value[_capacity]), _id(new std::size_t[_capacity]) {
-                for(std::size_t i = 0; i < _size; ++i) {
-                    _id[i] = i;
-                    _values[i] = values[i];
-                }
-            }
-
-            QuickFind(const std::vector<Value>& values) : _size(values.size()), _capacity(values.size()), _values(new Value[_capacity]), _id(new std::size_t[_capacity]) {
-                for(std::size_t i = 0; i < _size; ++i) {
-                    _id[i] = i;
-                    _values[i] = values[i];
-                }
-            }
-
-            QuickFind(std::size_t size, Value* values, std::size_t* id) : _size((size == 0) ? 10 : size), _capacity(_size*2), _values(new Value[_capacity]), _id(new std::size_t[_capacity]) {
-                for(std::size_t i = 0; i < _size; ++i) {
-                    this->_values[i] = values[i];
-                    this->_id[i] = id[i];
-                }
-            }
-
-            QuickFind(const std::vector<Value>& values, const std::vector<std::size_t>& id) : _size(values.size()), _capacity(values.size()), _values(new Value[_capacity]), _id(new std::size_t[_capacity]) {
-                for(std::size_t i = 0; i < _size; ++i) {
-                    this->_values[i] = values[i];
-                    this->_id[i] = id[i];
-                }
-            }
-
             QuickFind(const QuickFind& other) : _size(other._size), _capacity(other._capacity), _values(new Value[other._capacity]), _id(new std::size_t[other._capacity]) {
                 for(std::size_t i = 0; i < _size; ++i) {
                     this->_values[i] = other._values[i];
@@ -196,34 +168,6 @@ namespace unionfind {
                 for(std::size_t i = 0; i < _capacity; ++i) {
                     _parent[i] = i;
                     _values[i] = Value();
-                }
-            }
-
-            QuickUnion(std::size_t size, Value* values) : _size((size == 0) ? 10 : size), _capacity(_size*2), _values(new Value[_capacity]), _parent(new std::size_t[_capacity]) {
-                for(std::size_t i = 0; i < _size; ++i) {
-                    _parent[i] = i;
-                    this->_values[i] = values[i];
-                }
-            }
-
-            QuickUnion(const std::vector<Value>& values) : _size((values.size() == 0) ? 10 : values.size()), _capacity(_size * 2), _values(new Value[_capacity]), _parent(new std::size_t[_capacity]) {
-                for(std::size_t i = 0; i < _size; ++i) {
-                    _parent[i] = i;
-                    this->_values[i] = values[i];
-                }
-            }
-            
-            QuickUnion(std::size_t size, Value* values, std::size_t* parent) : _size((size == 0) ? 10 : size), _capacity(_size*2), _values(new Value[_capacity]), _parent(new std::size_t[_capacity]) {
-                for(std::size_t i = 0; i < _size; ++i) {
-                    this->_values[i] = values[i];
-                    this->_parent[i] = parent[i];
-                }
-            }
-
-            QuickUnion(const std::vector<Value>& values, const std::vector<std::size_t>& parent) : _size((values.size() == 0) ? 10 : values.size()), _capacity(_size * 2), _values(new Value[_capacity]), _parent(new std::size_t[_capacity]) {
-                for(std::size_t i = 0; i < _size; ++i) {
-                    this->_values[i] = values[i];
-                    this->_parent[i] = parent[i];
                 }
             }
 
@@ -379,50 +323,6 @@ namespace unionfind {
                 }
             }
 
-            WeightedQuickUnion(std::size_t size, Value* values) : _size((size == 0) ? 10 : size), _capacity(_size*2) {
-                _values = new Value[_capacity];
-                _parent = new std::size_t[_capacity];
-                _sizes = new std::size_t[_capacity];
-                for(std::size_t i = 0; i < size; ++i) {
-                    _values[i] = values[i];
-                    _parent[i] = i;
-                    _sizes[i] = 1;
-                }
-            }
-
-            WeightedQuickUnion(const std::vector<Value>& values) : _size((values.size() == 0) ? 10 : values.size()), _capacity(_size * 2) {
-                _values = new Value[_capacity];
-                _parent = new std::size_t[_capacity];
-                _sizes = new std::size_t[_capacity];
-                for(std::size_t i = 0; i < _size; ++i) {
-                    _values[i] = values[i];
-                    _parent[i] = i;
-                    _sizes[i] = 1;
-                }
-            }
-
-            WeightedQuickUnion(std::size_t size, Value* values, std::size_t* parent, std::size_t* sizes) : _size((size == 0) ? 10 : size), _capacity(_size * 2) {
-                _values = new Value[_capacity];
-                _parent = new std::size_t[_capacity];
-                _sizes = new std::size_t[_capacity];
-                for(std::size_t i = 0; i < _size; ++i) {
-                    _values[i] = values[i];
-                    _parent[i] = parent[i];
-                    _sizes[i] = sizes[i];
-                }
-            }
-
-            WeightedQuickUnion(const std::vector<Value>& values, const std::vector<std::size_t>& parent, const std::vector<std::size_t>& size) : _size((values.size() == 0) ? 10 : values.size()), _capacity(_size * 2) {
-                _values = new Value[_capacity];
-                _parent = new std::size_t[_capacity];
-                _sizes = new std::size_t[_capacity];
-                for(std::size_t i = 0; i < _size; ++i) {
-                    _values[i] = values[i];
-                    _parent[i] = parent[i];
-                    _sizes[i] = size[i];
-                }
-            }
-
             WeightedQuickUnion(const WeightedQuickUnion& other) : _size(other._size), _capacity(other._capacity) {
                 _values = new Value[_capacity];
                 _parent = new std::size_t[_capacity];
@@ -527,8 +427,16 @@ namespace unionfind {
             std::size_t find(std::size_t p) const {
                 if(p >= _size) { throw std::out_of_range("Index out of bounds"); }
 
-                while(p != _parent[p]) { p = _parent[p]; }
-                return p;
+                std::size_t root = p;
+                while(root != _parent[root]) { root = _parent[root]; }
+
+                while(p != root) {
+                    std::size_t next = _parent[p];
+                    _parent[p] = root;
+                    p = next;
+                }
+
+                return root;
             }
 
             /// @brief Unifies the components containing elements at indices p and q O(log(n))
@@ -567,11 +475,7 @@ namespace unionfind {
             }
 
             /// @brief Returns a reference to the value associated with the parent of the element at index `p`
-            Value& parent(std::size_t p) {
-                if(p >= _size) { throw std::out_of_range("Index out of bounds"); }
-
-                return _values[find(p)];
-            }
+            Value& parent(std::size_t p) { return _values[find(p)]; }
 
             /// @brief Returns a const reference to the value associated with the parent of the element at index `p`
             const Value& parent(std::size_t p) const { return _values[find(p)]; }
